@@ -2,7 +2,7 @@ package com.sparta.springlv4.user.service;
 
 import com.sparta.springlv4.common.jwt.JwtUtil;
 import com.sparta.springlv4.user.dto.UserRequestDto;
-import com.sparta.springlv4.user.entity.User;
+import com.sparta.springlv4.user.entity.UserEntity;
 import com.sparta.springlv4.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,11 +31,11 @@ public class UserService {
         String username = requestDto.getUsername();
         String passwrod = passwordEncoder.encode(requestDto.getPassword());
 
-        Optional<User> checkUsername = userRepository.findById(username);
+        Optional<UserEntity> checkUsername = userRepository.findById(username);
         if (checkUsername.isPresent())  {
             throw new IllegalArgumentException("존재하는 username입니다.");
         }
-        User user = new User(username,passwrod);
+        UserEntity user = new UserEntity(username,passwrod);
         userRepository.save(user);
     }
 
@@ -44,11 +44,11 @@ public class UserService {
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();
 
-        User user = userRepository.findById(username).orElseThrow(
+        UserEntity user = userRepository.findById(username).orElseThrow(
                 ()->new IllegalArgumentException("유저를 찾을 수 없습니다.")
         );
 
-        if (!passwordEncoder.matches(password,user.getPasswrod())){
+        if (!passwordEncoder.matches(password,user.getPassword())){
             throw new IllegalArgumentException("암호가 틀립니다.");
         }
         String token = jwtUtil.createToken(user.getUsername());

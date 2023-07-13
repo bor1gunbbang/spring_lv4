@@ -13,17 +13,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "user")
-public class User {
+public class UserEntity {
 
     @Id
     @Column(name = "user_id" ,nullable = false)
     private String username;
 
     @Column(name = "password", nullable = false)
-    private String passwrod;
+    private String password;
 
-    public User(String username, String passwrod) {
+    public UserEntity(String username, String password) {
         this.username= username;
-        this.passwrod = passwrod;
+        this.password = password;
     }
 }
