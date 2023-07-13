@@ -43,5 +43,16 @@ public class PostController {
         }
     }
 //선택한 게시글 조회하기
+//선택게시글 삭제하기
+@DeleteMapping("/post/{id}")
+public ResponseEntity<ApiResponseDto> deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    try{
+        postService.deletePost(id, userDetails.getUser());
+    }catch (IllegalArgumentException e){
+        return ResponseEntity.badRequest().body(new ApiResponseDto(400L,e.getMessage()));
+    }
+
+    return ResponseEntity.ok().body(new ApiResponseDto(200L,"게시글이 삭제되었습니다."));
+}//선택한 게시글 삭제하기
 
 }

@@ -2,13 +2,19 @@ package com.sparta.springlv4.post.service;
 
 import com.sparta.springlv4.comment.entity.CommentEntity;
 import com.sparta.springlv4.comment.repository.CommentRepository;
+import com.sparta.springlv4.common.dto.ApiResponseDto;
+import com.sparta.springlv4.common.security.UserDetailsImpl;
 import com.sparta.springlv4.post.dto.PostRequestDto;
 import com.sparta.springlv4.post.dto.PostResponseDto;
 import com.sparta.springlv4.post.entity.PostEntity;
 import com.sparta.springlv4.post.repository.PostRepository;
 import com.sparta.springlv4.user.entity.UserEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -49,10 +55,24 @@ public class PostService {
         PostEntity post = findPost(id);
         List<CommentEntity> commentList = findCommentList(post.getId());
     }
-
+    //선택게시글 조회하기
     private PostEntity findPost(Long id) {
         return postRepository.findById(id).orElseThrow(()->
                 new IllegalArgumentException("게시글을 찾지못했습니다."));
     }
 
+    //선택게시글 삭제하기
+    public void deletePost(Long id, UserEntity user) {
+        PostEntity post = findPost(id);
+
+        if (matchUser(post,user)){
+            postRepository.delete(post);
+        }else {
+            throw new RuntimeException("UNAUTHORIZED_REQUEST");
+        }
+    }
+
+    private boolean matchUser(PostEntity post, UserEntity user) {
+        return post.getUser().getUsername().equals(user.getUsername());
+    }
 }
