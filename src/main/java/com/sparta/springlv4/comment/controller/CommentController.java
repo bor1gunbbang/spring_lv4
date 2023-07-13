@@ -1,12 +1,14 @@
 package com.sparta.springlv4.comment.controller;
 
 
+import com.sparta.springlv4.comment.dto.CommentRequestDto;
 import com.sparta.springlv4.comment.dto.CommentResponseDto;
 import com.sparta.springlv4.comment.service.CommentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.sparta.springlv4.common.dto.ApiResponseDto;
+import com.sparta.springlv4.common.security.UserDetailsImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +26,21 @@ public class CommentController {
         return commentService.getComments(postId);
     }
     //댓글 가져오기
+
+
+    //댓글 생성하기
+    @PostMapping("/comment")
+    public ResponseEntity<?> createComment(@RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        try{
+            return ResponseEntity.ok().body(commentService.createComment(requestDto, userDetails.getUser()));
+        } catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(new ApiResponseDto(400L,e.getMessage()));
+        }
+    }
+    //댓글 생성하기
+
+    //댓글 수정하기
+
+    //댓글 수정하기
+
 }
