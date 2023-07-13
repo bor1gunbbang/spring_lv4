@@ -46,4 +46,28 @@ public class CommentService {
         return postRepository.findById(id).orElseThrow(()->
                 new RuntimeException("해당 게시글을 찾지 못했습니다."));
     }
+
+    @Transactional
+    public CommentResponseDto updateComment(Long commentId, CommentRequestDto responseDto, UserEntity user) {
+        CommentEntity comment = findComment(commentId);
+
+        if (matchUser(comment, user)){
+            comment.update(responseDto);
+
+            return new CommentResponseDto(comment);
+        }else {
+            throw new RuntimeException("UNAUTHORIZED_REQUEST");
+        }
+    }
+
+    private boolean matchUser(CommentEntity comment, UserEntity user) {
+        return comment.getUser().getUsername().equals(user.getUsername());
+    }
+
+    @Transactional(readOnly = true)
+    public CommentEntity findComment(Long id) {
+        return commentRepository.findById(id).orElseThrow(()->
+                new RuntimeException("해당댓글을 찾지 못했습니다")
+        );
+    }
 }

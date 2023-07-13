@@ -6,6 +6,7 @@ import com.sparta.springlv4.comment.dto.CommentResponseDto;
 import com.sparta.springlv4.comment.service.CommentService;
 import com.sparta.springlv4.common.dto.ApiResponseDto;
 import com.sparta.springlv4.common.security.UserDetailsImpl;
+import org.springframework.boot.convert.PeriodUnit;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,14 @@ public class CommentController {
     //댓글 생성하기
 
     //댓글 수정하기
-
+@PutMapping("/comment/{id}")
+    public ResponseEntity<?> updateComment(@PathVariable("id") Long id, @RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        try{
+            return ResponseEntity.ok().body(commentService.updateComment(id, requestDto,userDetails.getUser()));
+        }catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(new ApiResponseDto(400L,e.getMessage()));
+        }
+}
     //댓글 수정하기
 
 }
