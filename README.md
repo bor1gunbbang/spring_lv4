@@ -35,14 +35,19 @@
 에러를 못잡고있습니다... 팀프로젝트에서 했던걸 새로 만들어 작성중이었는데  
 PostService 파일에서
 이부분에서
+//
 @Transactional(readOnly = true)
     public List<PostResponseDto> getPosts() {
         return postRepository.findAllByOrderByCreatedAtDesc().stream().map(
         (PostEntity post)-> new PostResponseDto(post, findCommentList(post.getId()))).toList();<< 이부분에서 Cannot infer functional interface type에러가 나타나고
         
     }    //전체게시글 조회
-    PostController파일의
-    아래사진처럼도 에러가 나타납니다.
-    ![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/624a753b-f845-461d-a383-c83ba725f26f)
-    이거 해결하기전에는 다른걸 못하겠습니다.
+//
+
+
+
+PostController파일의
+아래사진처럼도 에러가 나타납니다.
+![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/624a753b-f845-461d-a383-c83ba725f26f)
+이거 해결하기전에는 다른걸 못하겠습니다.
     
