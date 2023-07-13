@@ -51,4 +51,16 @@ public class CommentController {
 }
     //댓글 수정하기
 
+    //댓글 삭제하기
+    @DeleteMapping("/comment/{id}")
+    public ApiResponseDto deleteComment(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        try{
+            commentService.deleteComment(id,userDetails.getUser());
+        }catch (RuntimeException e){
+            return new ApiResponseDto(400L,e.getMessage());
+        }
+
+        return new ApiResponseDto(200L,"댓글 삭제 성공");
+    }
+    //댓글 삭제하기
 }

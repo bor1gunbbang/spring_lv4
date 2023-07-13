@@ -70,4 +70,17 @@ public class CommentService {
                 new RuntimeException("해당댓글을 찾지 못했습니다")
         );
     }
+    @Transactional
+    public void deleteComment(Long CommentId, UserEntity user) {
+        //선택한 댓글이 존재하는지 확인
+        CommentEntity comment = findComment(CommentId);
+
+        //해당 사용자가 작성한 댓글 여부 혹은 관리자 여부 확인
+        if (matchUser(comment,user)){
+            commentRepository.delete(comment);
+        }
+        else {
+            throw new RuntimeException("UNAUTHORIZED_REQUEST");
+        }
+    }
 }
