@@ -17,13 +17,13 @@ public class User {
 
     @Id
     @Column(name = "user_id" ,nullable = false)
-    private String id;
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String passwrod;
 
-    public User(String id, String passwrod) {
-        this.id = id;
+    public User(String username, String passwrod) {
+        this.username= username;
         this.passwrod = passwrod;
     }
 }
