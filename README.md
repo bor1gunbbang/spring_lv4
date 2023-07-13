@@ -44,10 +44,3 @@ PostService 파일에서
     }    //전체게시글 조회
 //
 
-
-
-PostController파일의
-아래사진처럼도 에러가 나타납니다.
-![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/624a753b-f845-461d-a383-c83ba725f26f)
-이거 해결하기전에는 다른걸 못하겠습니다.
-    
