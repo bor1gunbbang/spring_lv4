@@ -34,6 +34,7 @@
 
 
 ERD
-![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/f2566969-5336-4079-ac02-d367b4715049)
+
+
 
 ![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/136326c7-4e05-4c9f-9ba0-f8960ee33527)
