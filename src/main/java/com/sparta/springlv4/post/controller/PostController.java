@@ -24,7 +24,7 @@ public class PostController {
     //-------------게시글 작성
     @PostMapping("/post")
     public PostResponseDto createPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postService.createPost(requestDto, userDetails.getUsername());
+        return postService.createPost(requestDto, userDetails.getUser());
     }
     //-------------게시글 작성
 

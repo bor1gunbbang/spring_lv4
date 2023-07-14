@@ -42,9 +42,10 @@ public class PostService {
     //전체게시글 조회
     @Transactional(readOnly = true)
     public List<PostResponseDto> getPosts() {
-        return postRepository.findAllByOrderByCreatedAtDesc().stream().map((PostEntity post)->
-                new PostResponseDto(post, findCommentList(post.getId()))).toList();
-    }    //전체게시글 조회
+        return postRepository.findAllByOrderByCreatedAtDesc().stream().map((PostEntity post) ->
+                new PostResponseDto(post, findCommentList(post.getId()))
+        ).toList();
+    }  //전체게시글 조회
 
     private List<CommentEntity> findCommentList(Long postId) {
         return commentRepository.findAllByPostIdOrderByCreatedAtDesc(postId);
@@ -54,6 +55,8 @@ public class PostService {
     public PostResponseDto getPost(Long id){
         PostEntity post = findPost(id);
         List<CommentEntity> commentList = findCommentList(post.getId());
+
+        return new PostResponseDto(post, commentList);
     }
     //선택게시글 조회하기
     private PostEntity findPost(Long id) {
