@@ -32,17 +32,6 @@
 |댓글 좋아요 등록|POST|api/comment/{id}/like|Cookie : {"Authorization" : "Bearer... "}||{"msg": "댓글 좋아요 성공", "statusCode": 200}||
 |댓글 좋아요 해제|DELETE|api/comment/{id}/like|Cookie : {"Authorization" : "Bearer... "}||{{"msg": "댓글 좋아요 취소", "statusCode": 200}
 
-에러를 못잡고있습니다... 팀프로젝트에서 했던걸 새로 만들어 작성중이었는데  
-PostService 파일에서
-이부분에서
-//
-@Transactional(readOnly = true)
-    public List<PostResponseDto> getPosts() {
-        return postRepository.findAllByOrderByCreatedAtDesc().stream().map(
-        (PostEntity post)-> new PostResponseDto(post, findCommentList(post.getId()))).toList();<< 이부분에서 Cannot infer functional interface type에러가 나타나고
-        
-    }    //전체게시글 조회
-//
 
 ERD
 ![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/f2566969-5336-4079-ac02-d367b4715049)
