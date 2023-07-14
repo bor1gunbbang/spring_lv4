@@ -44,3 +44,6 @@ PostService 파일에서
     }    //전체게시글 조회
 //
 
+ERD
+![image](https://github.com/bor1gunbbang/spring_lv4/assets/79289862/f2566969-5336-4079-ac02-d367b4715049)
+
