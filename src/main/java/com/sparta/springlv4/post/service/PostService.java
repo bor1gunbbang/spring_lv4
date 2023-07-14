@@ -43,7 +43,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostResponseDto> getPosts() {
         return postRepository.findAllByOrderByCreatedAtDesc().stream().map((PostEntity post) ->
-                new PostResponseDto(post, findCommentList(post.getId()))
+               new PostResponseDto(post, findCommentList(post.getId()))
         ).toList();
     }  //전체게시글 조회
 
