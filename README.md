@@ -2,7 +2,7 @@
 
 # API 설계
 
-1. User & Profile API
+1. User 
 
 |API 명|Method|URL|Request Cookie|Request|Response|Response Cookie|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
